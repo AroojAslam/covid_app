@@ -18,6 +18,11 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     duration: const Duration(seconds: 3),
       vsync: this)..repeat();
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _controller.dispose();
+  }
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -45,8 +50,13 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                 child: child
                 );
               }),
-              SizedBox(height: 10,),
-              Text('COVID-19 \nTracker App',textAlign: TextAlign.center,)
+              SizedBox(height: 30,),
+              Text('COVID-19 \nTracker App',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),)
 
             ],
           ),
