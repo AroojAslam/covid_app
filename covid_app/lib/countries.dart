@@ -3,6 +3,8 @@ import 'package:covid_app/states_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'country details.dart';
+
 class countriesData extends StatefulWidget {
   const countriesData({super.key});
 
@@ -27,7 +29,7 @@ class _countriesDataState extends State<countriesData> {
             child: TextFormField(
               onChanged: (value){
                 setState(() {
-                  
+
                 });
               },
               controller: searchColler,
@@ -50,33 +52,63 @@ class _countriesDataState extends State<countriesData> {
                     String name =snapshot.data![index]['country'];
                     if(searchColler.text.isEmpty){
                       return Column(children: [
-                        ListTile(
+                        InkWell(
 
-                          leading:  Image(
-                              height :40,
-                              width: 40,
-                              image: NetworkImage(snapshot.data![index]['countryInfo']['flag'].toString()
-                              )
+                          child: ListTile(
+
+                            leading:  Image(
+                                height :40,
+                                width: 40,
+                                image: NetworkImage(snapshot.data![index]['countryInfo']['flag'].toString()
+                                )
+                            ),
+
+                            title:Text(snapshot.data![index]['country'].toString()),
+                            subtitle: Text(snapshot.data![index]['cases'].toString()),
                           ),
-
-                          title:Text(snapshot.data![index]['country'].toString()),
-                          subtitle: Text(snapshot.data![index]['cases'].toString()),
+                          onTap: (){
+                            Navigator.push(
+                                context, MaterialPageRoute(
+                              builder: (context) => countryDetails(
+                                image:snapshot.data![index]['countryInfo']['flag'] ,
+                                active:snapshot.data![index]['active'] ,
+                                name:snapshot.data![index]['country'] ,
+                                totalCase: snapshot.data![index]['cases'],
+                                totalDeaths:snapshot.data![index]['deaths'] ,
+                                todayRecovered:snapshot.data![index]['todayRecovered']
+                                ,),));
+                          },
                         ),
                       ],);
 
                     }else if(name.toLowerCase().contains(searchColler.text.toLowerCase())){
                       return Column(children: [
-                        ListTile(
+                        InkWell(
 
-                          leading:  Image(
-                              height :40,
-                              width: 40,
-                              image: NetworkImage(snapshot.data![index]['countryInfo']['flag'].toString()
-                              )
+                          child: ListTile(
+
+                            leading:  Image(
+                                height :40,
+                                width: 40,
+                                image: NetworkImage(snapshot.data![index]['countryInfo']['flag'].toString()
+                                )
+                            ),
+
+                            title:Text(snapshot.data![index]['country'].toString()),
+                            subtitle: Text(snapshot.data![index]['cases'].toString()),
                           ),
-
-                          title:Text(snapshot.data![index]['country'].toString()),
-                          subtitle: Text(snapshot.data![index]['cases'].toString()),
+                          onTap: (){
+                            Navigator.push(
+                                context, MaterialPageRoute(
+                              builder: (context) => countryDetails(
+                                image:snapshot.data![index]['countryInfo']['flag'] ,
+                                active:snapshot.data![index]['active'] ,
+                                name:snapshot.data![index]['country'] ,
+                                totalCase: snapshot.data![index]['cases'],
+                                totalDeaths:snapshot.data![index]['deaths'] ,
+                                todayRecovered:snapshot.data![index]['todayRecovered']
+                                ,),));
+                          },
                         ),
                       ],);
                     }else{
